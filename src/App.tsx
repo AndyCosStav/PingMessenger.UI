@@ -13,6 +13,7 @@ import LoginPage from "./components/login/LoginPage";
 import RegisterPage from "./components/login/RegisterPage";
 import NavMenu from "./components/navbar/NavMenu";
 import Hub from "./components/userArea/hub";
+import LoggedInWrapper from "./privateRoutes/LoggedInWrapper";
 import PrivateWrapper from "./privateRoutes/PrivateWrapper";
 
 function App() {
@@ -34,8 +35,22 @@ function App() {
         <NavMenu />
         <div className="App">
           <Routes>
-            <Route path={"/login"} element={<LoginPage />} />
-            <Route path={"/register"} element={<RegisterPage />} />
+            <Route
+              path={"/login"}
+              element={
+                <LoggedInWrapper>
+                  <LoginPage />
+                </LoggedInWrapper>
+              }
+            />
+            <Route
+              path={"/register"}
+              element={
+                <LoggedInWrapper>
+                  <RegisterPage />
+                </LoggedInWrapper>
+              }
+            />
             <Route
               path={"/hub"}
               element={

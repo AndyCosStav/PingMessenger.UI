@@ -3,6 +3,7 @@ import { createContext, useContext } from "react";
 export enum UserStatus {
   LoggedOff = 0,
   LoggedIn = 1,
+  UserStatus,
 }
 
 export type UserStatusContextType = {
