@@ -28,41 +28,11 @@ function App() {
     // persist userStatus state changes to localStorage
     localStorage.setItem("userStatus", JSON.stringify(userStatus));
   }, [userStatus]);
-
   return (
-    <UserStatusContext.Provider value={{ userStatus, setUserStatus }}>
-      <Router>
-        <NavMenu />
-        <div className="App">
-          <Routes>
-            <Route
-              path={"/login"}
-              element={
-                <LoggedInWrapper>
-                  <LoginPage />
-                </LoggedInWrapper>
-              }
-            />
-            <Route
-              path={"/register"}
-              element={
-                <LoggedInWrapper>
-                  <RegisterPage />
-                </LoggedInWrapper>
-              }
-            />
-            <Route
-              path={"/hub"}
-              element={
-                <PrivateWrapper>
-                  <Hub />
-                </PrivateWrapper>
-              }
-            />
-          </Routes>
-        </div>
-      </Router>
-    </UserStatusContext.Provider>
+    <div>
+      <h1>testing</h1>
+      <Hub />
+    </div>
   );
 }
 
