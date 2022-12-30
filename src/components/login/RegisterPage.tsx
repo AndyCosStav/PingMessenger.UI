@@ -4,11 +4,14 @@ import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./LoginPage.css";
 import authService from "../../services/authService";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -30,7 +33,7 @@ const RegisterPage = () => {
       Password: password,
     };
     authService.register(credentials);
-    e.preventDefault();
+    navigate("/");
   };
 
   return (

@@ -6,9 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavigationBar from "./components/navigation/NavigationBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from "./components/login/LoginPage";
-import LoggedInWrapper from "./privateRoutes/LoggedInWrapper";
 import RegisterPage from "./components/login/RegisterPage";
-import PrivateWrapper from "./privateRoutes/PrivateWrapper";
 import Hub from "./components/userArea/hub";
 
 const root = ReactDOM.createRoot(
@@ -18,30 +16,9 @@ root.render(
   <BrowserRouter>
     <NavigationBar />
     <Routes>
-      <Route
-        path={"/"}
-        element={
-          <PrivateWrapper>
-            <App />
-          </PrivateWrapper>
-        }
-      />
-      <Route
-        path={"/login"}
-        element={
-          <LoggedInWrapper>
-            <LoginPage />
-          </LoggedInWrapper>
-        }
-      />
-      <Route
-        path={"/register"}
-        element={
-          <LoggedInWrapper>
-            <RegisterPage />
-          </LoggedInWrapper>
-        }
-      />
+      <Route path={"/"} element={<App />} />
+      <Route path={"/login"} element={<LoginPage />} />
+      <Route path={"/register"} element={<RegisterPage />} />
     </Routes>
   </BrowserRouter>
 

@@ -1,7 +1,6 @@
 import axios from "axios";
 import configData from "../configs/config.json";
 import Cookies from "universal-cookie";
-import { useUserStatus } from "../components/context/context";
 
 const API_URL = configData.PingMessengerAPI;
 
@@ -50,12 +49,20 @@ const register = (credentials: IRegisterCredentials) => {
 
 const logOut = () => {
   cookies.remove("access-token", { path: "/" });
+  window.location.reload();
+};
+
+const getCurrentUser = () => {
+  const userStr = cookies.get("access-token");
+  console.log(userStr);
+  return userStr;
 };
 
 const authService = {
   login,
   register,
   logOut,
+  getCurrentUser,
 };
 
 export default authService;

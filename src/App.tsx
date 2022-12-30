@@ -5,33 +5,34 @@ import {
   Route,
   Link,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 
-import "./App.css";
-import { UserStatus, UserStatusContext } from "./components/context/context";
 import LoginPage from "./components/login/LoginPage";
 import RegisterPage from "./components/login/RegisterPage";
-import NavMenu from "./components/navbar/NavMenu";
 import Hub from "./components/userArea/hub";
-import LoggedInWrapper from "./privateRoutes/LoggedInWrapper";
-import PrivateWrapper from "./privateRoutes/PrivateWrapper";
+
+import authService from "../src/services/authService";
 
 function App() {
-  const [userStatus, setUserStatus] = React.useState(
-    // initial value from localStorage or default value
-    JSON.parse(localStorage.getItem("userStatus") || "{}") ??
-      UserStatus.LoggedOff
+  const [currentUserStatus, setCurrentUserStatus] = React.useState(
+    authService.getCurrentUser()
   );
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    console.log("userStatus is " + userStatus);
-    // persist userStatus state changes to localStorage
-    localStorage.setItem("userStatus", JSON.stringify(userStatus));
-  }, [userStatus]);
+    if (currentUserStatus == null) {
+      navigate("/login");
+    }
+  });
+
+  if (!currentUserStatus) return <h1>Loading...</h1>;
+
   return (
     <div>
-      <h1>testing</h1>
-      <Hub />
+      {/* <Hub /> */}
+      <h1>Testttt</h1>
     </div>
   );
 }

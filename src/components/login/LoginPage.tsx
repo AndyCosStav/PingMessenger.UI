@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./LoginPage.css";
 import authService from "../../services/authService";
 import { Navigate, useNavigate } from "react-router-dom";
-import { UserStatus, useUserStatus } from "../context/context";
 
 const LoginPage = () => {
   const [username, setUserName] = useState("");
@@ -13,7 +12,15 @@ const LoginPage = () => {
   const [errMsg, setErrMsg] = useState("");
   const [sucess, setSuccess] = useState("");
 
-  const { userStatus, setUserStatus } = useUserStatus();
+  const [currentUserStatus, setCurrentUserStatus] = React.useState(
+    authService.getCurrentUser()
+  );
+
+  useEffect(() => {
+    if (currentUserStatus != null) {
+      navigate("/");
+    }
+  });
 
   const navigate = useNavigate();
 
@@ -36,7 +43,9 @@ const LoginPage = () => {
     var completed = await completeLoginAction(credentials);
 
     if (completed) {
-      navigate("/hub");
+      console.log("logged in");
+      navigate("/");
+      window.location.reload();
     } else {
       showErrorMessage();
     }
@@ -45,8 +54,6 @@ const LoginPage = () => {
   const completeLoginAction = async (credentials: any) => {
     var loginSuccess = await authService.login(credentials);
     if (loginSuccess) {
-      setUserStatus(UserStatus.LoggedIn);
-      localStorage.setItem("userStatus", JSON.stringify(userStatus));
       return true;
     } else {
       return false;
@@ -62,6 +69,8 @@ const LoginPage = () => {
       elms[i].style.display = "block";
     }
   };
+
+  if (currentUserStatus) return <h1>Error</h1>;
 
   return (
     <div className="container">

@@ -1,16 +1,12 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import Cookies from "universal-cookie";
-import { UserStatus, useUserStatus } from "../context/context";
 import { useNavigate } from "react-router-dom";
 
 const Hub = () => {
-  const { userStatus, setUserStatus } = useUserStatus();
-
   const navigate = useNavigate();
 
   const logOut = () => {
-    setUserStatus(UserStatus.LoggedOff);
     navigate("/login");
   };
 
