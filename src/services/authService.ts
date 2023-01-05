@@ -24,11 +24,13 @@ const login = async (credentials: ILoginCredentials) => {
         path: "/",
         expires: new Date(response.data.expiration),
       });
-      console.log(cookies);
+      cookies.set("username", credentials.Username, {
+        path: "/",
+        expires: new Date(response.data.expiration),
+      });
       return true;
     })
     .catch(function (error) {
-      console.log(error);
       return false;
     });
 };
@@ -38,9 +40,7 @@ const register = (credentials: IRegisterCredentials) => {
     axios
       .post(API_URL + "/register", credentials)
       //if response is ok then proceed
-      .then((response) => {
-        console.log(response);
-      })
+      .then((response) => {})
       .catch((error) => {
         console.log(error);
       })
@@ -52,17 +52,22 @@ const logOut = () => {
   window.location.reload();
 };
 
-const getCurrentUser = () => {
+const getCurrentUserStatus = () => {
   const userStr = cookies.get("access-token");
-  console.log(userStr);
   return userStr;
+};
+
+const getUsername = () => {
+  const username = cookies.get("username");
+  return username;
 };
 
 const authService = {
   login,
   register,
   logOut,
-  getCurrentUser,
+  getCurrentUserStatus,
+  getUsername,
 };
 
 export default authService;

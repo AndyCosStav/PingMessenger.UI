@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [sucess, setSuccess] = useState("");
 
   const [currentUserStatus, setCurrentUserStatus] = React.useState(
-    authService.getCurrentUser()
+    authService.getCurrentUserStatus()
   );
 
   useEffect(() => {
@@ -43,7 +43,6 @@ const LoginPage = () => {
     var completed = await completeLoginAction(credentials);
 
     if (completed) {
-      console.log("logged in");
       navigate("/");
       window.location.reload();
     } else {

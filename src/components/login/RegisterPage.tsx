@@ -26,7 +26,6 @@ const RegisterPage = () => {
   };
 
   const handleSave = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("saved button hit");
     const credentials = {
       Email: email,
       Username: username,

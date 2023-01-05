@@ -4,14 +4,15 @@ import { BrowserRouter as Router, useNavigate } from "react-router-dom";
 import Hub from "./components/userArea/hub";
 
 import authService from "../src/services/authService";
+import addressBookService from "./services/addressBookService";
+import { Guid } from "guid-typescript";
 
 function App() {
   const [currentUserStatus, setCurrentUserStatus] = React.useState(
-    authService.getCurrentUser()
+    authService.getCurrentUserStatus()
   );
 
   const navigate = useNavigate();
-
   useEffect(() => {
     if (currentUserStatus == null) {
       navigate("/login");
@@ -22,8 +23,7 @@ function App() {
 
   return (
     <div>
-      {/* <Hub /> */}
-      <h1>Testttt</h1>
+      <Hub />
     </div>
   );
 }

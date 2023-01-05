@@ -11,7 +11,6 @@ const NavigationBar = () => {
       "LogoutEl"
     ) as HTMLCollectionOf<HTMLElement>;
     if (isLoggedIn) {
-      console.log(logoutElms);
       for (var i = 0; i < elms.length; i++) {
         elms[i].style.display = "none";
       }
@@ -29,7 +28,7 @@ const NavigationBar = () => {
   };
 
   const [currentUserStatus, setCurrentUserStatus] = React.useState(
-    authService.getCurrentUser()
+    authService.getCurrentUserStatus()
   );
 
   useEffect(() => {

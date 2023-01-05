@@ -1,18 +1,44 @@
 import configData from "../configs/config.json";
-import Axios from "axios";
 import axios from "axios";
+import { Guid } from "guid-typescript";
+import authService from "./authService";
+
+axios.defaults.headers.common = {
+  Authorization: `bearer ${authService.getCurrentUserStatus()}`,
+};
+
+interface ListContactRequest {
+  userId: Guid;
+}
 
 const API_URL = configData.PingMessengerAPI;
-
-const SearchUser = (username: string) => {
-  return axios.post(API_URL + "/searchUser", username).then((response) => {
-    console.log(response);
-  });
+//unsupported media type when searching user - need to search user to get user object to pass through to contact list
+const SearchUser = async (username: string) => {
+  return axios
+    .post(API_URL + "/searchUser", username, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    });
 };
 
 const AddToAddressBook = () => {};
 
-const ListContacts = () => {};
+const ListContacts = (user: ListContactRequest) => {
+  return axios
+    .post(API_URL + "/listContacts", {
+      params: { user },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
 
 const addressBookService = {
   SearchUser,
