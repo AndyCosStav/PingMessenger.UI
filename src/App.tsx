@@ -1,15 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, useNavigate } from "react-router-dom";
 
-import LoginPage from "./components/login/LoginPage";
-import RegisterPage from "./components/login/RegisterPage";
 import Hub from "./components/userArea/hub";
 
 import authService from "../src/services/authService";
