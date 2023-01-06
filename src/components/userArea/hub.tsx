@@ -8,8 +8,6 @@ import addressBookService from "../../services/addressBookService";
 
 const Hub = () => {
   const [username, setUsername] = React.useState(authService.getUsername());
-
-  const user = addressBookService.SearchUser(username);
   return (
     <div>
       <h1>This is the member area</h1>

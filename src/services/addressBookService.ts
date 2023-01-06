@@ -7,7 +7,7 @@ axios.defaults.headers.common = {
   Authorization: `bearer ${authService.getCurrentUserStatus()}`,
 };
 
-interface ListContactRequest {
+interface IListContactRequest {
   userId: Guid;
 }
 
@@ -27,16 +27,16 @@ const SearchUser = async (username: string) => {
 
 const AddToAddressBook = () => {};
 
-const ListContacts = (user: ListContactRequest) => {
+const ListContacts = (userId: string) => {
+  console.log(JSON.stringify(userId));
   return axios
-    .post(API_URL + "/listContacts", {
-      params: { user },
+    .post(API_URL + "/listContacts", userId, {
       headers: {
         "Content-Type": "application/json",
       },
     })
     .then((response) => {
-      return response.data;
+      return response;
     });
 };
 
