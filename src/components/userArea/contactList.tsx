@@ -2,17 +2,18 @@ import { Guid } from "guid-typescript";
 import React, { useEffect, useState } from "react";
 import addressBookService from "../../services/addressBookService";
 
-const ContactList = () => {
-  //test value be sure to change
-  var userId = "C46343DC-4585-4E66-9C1F-496A0430354A";
+interface IProps {
+  userID: string;
+}
 
+const ContactList = ({ userID }: IProps) => {
   const [contactList, setContactList] = React.useState([
-    addressBookService.ListContacts(userId),
+    addressBookService.ListContacts(userID),
   ]);
 
   const GetListOfContacts = async () => {
     await addressBookService
-      .ListContacts(userId)
+      .ListContacts(userID)
       .then((response) => console.log(response.data));
   };
 

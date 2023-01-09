@@ -21,7 +21,7 @@ const SearchUser = async (username: string) => {
       },
     })
     .then((response) => {
-      return response.data;
+      return response;
     });
 };
 

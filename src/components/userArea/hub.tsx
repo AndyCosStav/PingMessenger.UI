@@ -8,10 +8,22 @@ import addressBookService from "../../services/addressBookService";
 
 const Hub = () => {
   const [username, setUsername] = React.useState(authService.getUsername());
+
+  const [resultstring, setResult] = React.useState("");
+
+  useEffect(() => {
+    const getUserId = async () => {
+      addressBookService
+        .SearchUser(username)
+        .then((response) => setResult(response.data.userId));
+    };
+    getUserId();
+  }, []);
+
   return (
     <div>
       <h1>This is the member area</h1>
-      <ContactList />
+      <ContactList userID={resultstring} />
     </div>
   );
 };
